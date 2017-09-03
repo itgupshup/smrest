@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.b2e.smrest.dao.LoginDao;
 import com.b2e.smrest.dao.MessageDao;
-import com.b2e.smrest.dao.SMDao;
 import com.b2e.smrest.domain.Message;
 
 @RestController

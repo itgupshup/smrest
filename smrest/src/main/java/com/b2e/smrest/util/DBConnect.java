@@ -13,16 +13,15 @@ import org.apache.logging.log4j.Logger;
 
 public class DBConnect {
 
-	
 	private DataSource dataSource;
 	private Connection connection;
 
 	static Logger log = LogManager.getLogger(DBConnect.class.getName());
-	
-	public DBConnect(){
-		
+
+	public DBConnect() {
+
 	}
-	
+
 	public void connect() {
 		try {
 			Context ctx = new InitialContext();
@@ -46,7 +45,7 @@ public class DBConnect {
 			log.error("NamingException --- " + nme);
 			nme.printStackTrace();
 		} catch (SQLException sqe) {
-			log.error("SQLException --- " + sqe);
+			log.error("SQLException -- Error opening connection -- " + sqe);
 			sqe.printStackTrace();
 		}
 	}
@@ -61,14 +60,15 @@ public class DBConnect {
 
 	public void closeConnection() {
 		try {
-			connection.close();
-			connection = null;
-			log.debug("SMRest Data Source disconnected !!!");
+			if (connection != null) {
+				connection.close();
+				connection = null;
+				log.debug("SMRest Data Source disconnected !!!");
+			}
 		} catch (SQLException sqlException) {
-			log.error("SQLException --- " + sqlException);
+			log.error("SQLException -- Error closing Connection -- " + sqlException);
 			sqlException.printStackTrace();
 		}
 	}
-	
 
 }
